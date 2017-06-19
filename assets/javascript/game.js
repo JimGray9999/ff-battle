@@ -8,10 +8,19 @@ $(document).ready(function(){
 		this.attackPts = attackPts;
 		this.counterHitPts = counterHitPts;
 		this.image = image;
+		
+		attack: function (){
+		// attack opponent	
+		}
+		
+		counterAttack: function (){
+		// counter attack
+		}
 	}
 
-	var Cloud = new toon("Cloud", 100, 35, 40, );
-	var 
+	// create instances of the characters as toon objects
+	
+	var Cloud = new toon("Cloud", 100, 35, 40, ); // to do: add the image as an argument
 
 
 });
