@@ -2,11 +2,11 @@ $(document).ready(function(){
 
 	// declare playing characters
 
-	function toon(name, hitPoints, attackPts, counterHitPts, image){
+	function toon(name, hitPoints, attackPts, counterPts, image){
 		this.name = name;
 		this.hitPoints = hitPoints;
 		this.attackPts = attackPts;
-		this.counterHitPts = counterHitPts;
+		this.counterPts = counterPts;
 		this.image = image;
 		
 		attack: function (){
@@ -22,5 +22,11 @@ $(document).ready(function(){
 	
 	var Cloud = new toon("Cloud", 100, 35, 40, ); // to do: add the image as an argument
 
-
+	
+	// create array of all the created characters
+	var Fighters = []; // to do: add all of the characters above
+	
+	// choose your character
+	
+	// choose your opponent
 });
