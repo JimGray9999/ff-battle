@@ -90,7 +90,7 @@ $(document).ready(function() {
         console.log("You selected Chocobo");
     });
 
-    $("#player3").on("click", function() {
+    $("#player4").on("click", function() {
         // display the character's Name, HP, CP
         // confirm if this is the player's selection
         console.log("You selected Lightning");
