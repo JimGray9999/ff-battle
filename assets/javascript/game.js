@@ -46,23 +46,25 @@ $(document).ready(function(){
 
 	// change player if picked, need to add an onclick event to each toon
 
-	function attack (name, AP, HP, oppName, oppHP){
-		console.log(name + " attacked " + oppName + "!");
-		console.log("Hit for " + AP + " points!");
+	function attack (player, opponent){
+		console.log(player.name + " attacked " + opponent.name + 
+			" for " + player.counterPts + " points!");
 		
 		// minus from opponent hit points
-		oppHP = oppHP - AP;
+		opponent.hitPoints -= player.attackPts;
+		
+		console.log(opponent.name + " now has " + opponent.hitPoints + " hit points!");
+
 		// check if opponent HP = 0
-		console.log(oppName + " now has " + oppHP + " hit points!");
 	}
 
-	function defend (name, CP, oppName, oppHP){
-		console.log(name + " countered " + oppName + " for " + CP + " points!");
+	function defend (player, opponent){
+		console.log(player.name + " countered " + opponent.name + " for " + player.counterPts + " points!");
 
 		// minus from player hit points
-		oppHP = oppHP - CP;
+		opponent.hitPoints -= player.counterPts;
 		// check if opponent HP = 0
-		console.log(oppName + " now has " + oppHP + " hit points!");
+		console.log(opponent.name + " now has " + opponent.hitPoints + " hit points!");
 	}
 
 
@@ -82,12 +84,11 @@ $(document).ready(function(){
 	console.log(Cloud.hitPoints);
 	console.log(Sephiroth.hitPoints);
 
-	attack(Cloud.name, Cloud.attackPts, Cloud.hitPoints, Sephiroth.name, Sephiroth.hitPoints);
-	defend(Sephiroth.name, Sephiroth.counterPts, Cloud.name, Cloud.hitPoints);
+	// click events for attack, which will counter with the defend function
+	attack(Cloud, Sephiroth);
+	defend(Sephiroth, Cloud);
 
-
-	// need to have the HP updated based on the attack/defend function
-	console.log(Cloud.hitPoints);
-	console.log(Sephiroth.hitPoints);
+	console.log("Cloud: " + Cloud.hitPoints + " HP remaining");
+	console.log("Sephiroth: " + Sephiroth.hitPoints + " HP remaining");
 
 });
