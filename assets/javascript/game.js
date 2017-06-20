@@ -44,8 +44,43 @@ $(document).ready(function() {
     $("#player4").attr("src", Lightning.image);
 
 
-    // change player if picked, need to add an onclick event to each toon
 
+
+    // create array of all the created characters
+    var Fighters = [Cloud, Sephiroth, Chocobo, Lightning];
+
+    // choose your character
+    $("#player1").on("click", function() {
+        // display the character's Name, HP, CP
+        // display image in arena
+        // confirm if this is the player's selection
+        console.log("You selected Cloud");
+    });
+
+    $("#player2").on("click", function() {
+        // display the character's Name, HP, CP
+        // confirm if this is the player's selection
+        // display image in arena
+        console.log("You selected Sephiroth");
+    });
+
+    $("#player3").on("click", function() {
+        // display the character's Name, HP, CP
+        // confirm if this is the player's selection
+        // display image in arena
+        console.log("You selected Chocobo");
+    });
+
+    $("#player4").on("click", function() {
+        // display the character's Name, HP, CP
+        // confirm if this is the player's selection
+        // display image in arena
+        console.log("You selected Lightning");
+    });
+
+    // choose your opponent
+
+    // attack and defend functions
     function attack(player, opponent) {
         console.log(player.name + " attacked " + opponent.name +
             " for " + player.counterPts + " points!");
@@ -66,40 +101,6 @@ $(document).ready(function() {
         // check if opponent HP = 0
         console.log(opponent.name + " now has " + opponent.hitPoints + " hit points!");
     }
-
-
-    // create array of all the created characters
-    var Fighters = [Cloud, Sephiroth, Chocobo, Lightning];
-
-    // choose your character
-    $("#player1").on("click", function() {
-        // display the character's Name, HP, CP
-        // confirm if this is the player's selection
-        console.log("You selected Cloud");
-    });
-
-    $("#player2").on("click", function() {
-        // display the character's Name, HP, CP
-        // confirm if this is the player's selection
-        console.log("You selected Sephiroth");
-    });
-
-    $("#player3").on("click", function() {
-        // display the character's Name, HP, CP
-        // confirm if this is the player's selection
-        console.log("You selected Chocobo");
-    });
-
-    $("#player4").on("click", function() {
-        // display the character's Name, HP, CP
-        // confirm if this is the player's selection
-        console.log("You selected Lightning");
-    });
-
-    // choose your opponent
-
-    // attack!
-
     console.log(Cloud.hitPoints);
     console.log(Sephiroth.hitPoints);
 
