@@ -11,7 +11,7 @@ $(document).ready(function() {
         this.image = image;
     }
 
-    // create instances of the characters as toon objects
+    // create instances of the characters as Toon objects
 
     var Cloud = new Toon(name = "Cloud",
         hitPoints = 1000,
@@ -43,72 +43,70 @@ $(document).ready(function() {
     $("#player3").attr("src", Chocobo.image);
     $("#player4").attr("src", Lightning.image);
 
-
-
-
     // create array of all the created characters
     var Fighters = [Cloud, Sephiroth, Chocobo, Lightning];
 
     // choose your character
+    function playerPick (player) {
+        console.log("You selected " + Cloud);
+        $(".stats").html("<p>Name: " + player.name + "</p> <p>HP: " + player.hitPoints +
+            "</p> <p>AP: " + player.attackPts + "</p> <p>CP: " + player.counterPts + "</p>");
+        $(".player").attr("src", player.image);
+    }
+
+    // choose your opponent
+    function opponentPick () {
+
+    }
+
+    // player images, click events choose
     $("#player1").on("click", function() {
-        // display the character's Name, HP, CP
-        // display image in arena
-        // confirm if this is the player's selection
-        console.log("You selected Cloud");
+        playerPick(Cloud);
     });
 
     $("#player2").on("click", function() {
-        // display the character's Name, HP, CP
-        // confirm if this is the player's selection
-        // display image in arena
-        console.log("You selected Sephiroth");
+        playerPick(Sephiroth);
     });
 
     $("#player3").on("click", function() {
-        // display the character's Name, HP, CP
-        // confirm if this is the player's selection
-        // display image in arena
-        console.log("You selected Chocobo");
+        playerPick(Chocobo);
     });
 
     $("#player4").on("click", function() {
-        // display the character's Name, HP, CP
-        // confirm if this is the player's selection
-        // display image in arena
-        console.log("You selected Lightning");
+        playerPick(Lightning);
     });
 
-    // choose your opponent
-
+    
     // attack and defend functions
     function attack(player, opponent) {
-        console.log(player.name + " attacked " + opponent.name +
-            " for " + player.counterPts + " points!");
+        $("#log").append("<p>" + player.name + " attacked " + opponent.name +
+            " for " + player.counterPts + " points!</p>");
 
         // minus from opponent hit points
         opponent.hitPoints -= player.attackPts;
 
-        console.log(opponent.name + " now has " + opponent.hitPoints + " hit points!");
+        $("#log").append("<p>" + opponent.name + " now has " + opponent.hitPoints + " hit points!</p>");
 
-        // check if opponent HP = 0
+        // to do: check if opponent HP = 0
+        // to do: add slashing sound
+        // to do: change picture red for one second (if time permits)
     }
 
     function defend(player, opponent) {
-        console.log(player.name + " countered " + opponent.name + " for " + player.counterPts + " points!");
-
+        $("#log").append("<p>" + player.name + " countered " + opponent.name + " for " + player.counterPts + " points!</p>");
+        
         // minus from player hit points
         opponent.hitPoints -= player.counterPts;
-        // check if opponent HP = 0
-        console.log(opponent.name + " now has " + opponent.hitPoints + " hit points!");
+
+        $("#log").append("<p>" + opponent.name + " now has " + opponent.hitPoints + " hit points!</p>");
+
+        // to do: check if opponent HP = 0
+        // to do: add slashing sound
+        // to do: change picture red for one second (if time permits)
     }
-    console.log(Cloud.hitPoints);
-    console.log(Sephiroth.hitPoints);
 
     // click events for attack, which will counter with the defend function
     attack(Cloud, Sephiroth);
     defend(Sephiroth, Cloud);
-
-    console.log("Cloud: " + Cloud.hitPoints + " HP remaining");
-    console.log("Sephiroth: " + Sephiroth.hitPoints + " HP remaining");
 
 });

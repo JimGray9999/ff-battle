@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    
 
     <title>Final Fantasy Battle!</title>
 </head>
@@ -17,7 +18,7 @@
 
     <div class="container fighters">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <img id="player1" src="https://unsplash.it/200" width="200" height="200" alt="cloud">
                 <img id="player2" src="https://unsplash.it/200" width="200" height="200" alt="sephiroth">
                 <img id="player3" src="https://unsplash.it/200" width="200" height="200" alt="chocobo">
@@ -29,19 +30,32 @@
     <!--battle arena-->
     <div class="container arena">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-3">
                 <p>Your Player</p>
                 <img class="player" src="https://unsplash.it/200" alt="Player" width="200" height="200">
             </div>
-            <div class="col-md-6">
+            <div class="col-md-3 stats">
+                <p>Name: </p>
+                <p>HP: </p>
+                <p>AP: </p>
+                <p>CP: </p>
+            </div>
+            <div class="col-md-3">
                 <p>Your Opponent</p>
                 <img class="enemy" src="https://unsplash.it/200" alt="enemy" width="200" height="200">
+            </div>
+            <div class="col-md-3 enemy-stats">
+                <p>Name: </p>
+                <p>HP: </p>
+                <p>AP: </p>
+                <p>CP: </p>
             </div>
         </div>
     </div>
 
     <div class="container battle-log">
         <!--comments on game progress will appear here-->
+        <p id="log"></p>
     </div>
 
     <!-- jQuery -->
@@ -53,3 +67,6 @@
 </body>
 
 </html>
+
+    <!-- sounds made available for public use from http://en.soundeffect-lab.info/sound/battle/ -->
+    <!-- any copyrighted material only intended for educational use, no profit to be made -->

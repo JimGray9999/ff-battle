@@ -1,5 +1,3 @@
-img {
-    padding: 20px;
-    border-color: green;
-    border: 10px;
+.battle-log, .fighters, .arena, .stats, .enemy-stats, img {
+	border: 1px solid black;
 }
