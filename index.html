@@ -7,7 +7,7 @@
     <!-- CSS links: reset.css, Bootstrap.css, style.css -->
     <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 
     <title>Final Fantasy Battle!</title>
 </head>
@@ -29,18 +29,26 @@
     <!--battle arena-->
     <div class="container arena">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-6">
+                <p>Your Player</p>
                 <img class="player" src="https://unsplash.it/200" alt="Player" width="200" height="200">
+            </div>
+            <div class="col-md-6">
+                <p>Your Opponent</p>
                 <img class="enemy" src="https://unsplash.it/200" alt="enemy" width="200" height="200">
             </div>
         </div>
+    </div>
+
+    <div class="container battle-log">
+        <!--comments on game progress will appear here-->
     </div>
 
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous">
     </script>
 
-    <!-- JavaScript file for game logic -->
+    <!-- JavaScript game logic file -->
     <script src="assets/javascript/game.js"></script>
 </body>
 
