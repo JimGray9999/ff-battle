@@ -127,4 +127,11 @@ $(document).ready(function() {
         attack(Cloud, Sephiroth);
         defend(Sephiroth, Cloud);
     });
+
+    $("#clear-log").click(function() {
+
+        $("#log").text("")
+
+    });
+
 });
