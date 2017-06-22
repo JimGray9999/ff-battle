@@ -47,7 +47,7 @@ $(document).ready(function() {
     var Fighters = [Cloud, Sephiroth, Chocobo, Lightning];
 
     // choose your character
-    function playerPick (player, selected) {
+    function playerPick(player, selected) {
         console.log("You selected " + Cloud);
         $(".stats").html("<p>Name: " + player.name + "</p> <p>HP: " + player.hitPoints +
             "</p> <p>AP: " + player.attackPts + "</p> <p>CP: " + player.counterPts + "</p>");
@@ -57,7 +57,7 @@ $(document).ready(function() {
     }
 
     // choose your opponent
-    function opponentPick () {
+    function opponentPick() {
 
     }
 
@@ -78,7 +78,7 @@ $(document).ready(function() {
         playerPick(Lightning, "#player4");
     });
 
-    
+
     // attack and defend functions
     function attack(player, opponent) {
         $("#log").append("<p>" + player.name + " attacked " + opponent.name +
@@ -97,7 +97,7 @@ $(document).ready(function() {
 
     function defend(player, opponent) {
         $("#log").append("<p>" + player.name + " countered " + opponent.name + " for " + player.counterPts + " points!</p>");
-        
+
         // minus from player hit points
         opponent.hitPoints -= player.counterPts;
 
@@ -109,8 +109,9 @@ $(document).ready(function() {
     }
 
     // click events for attack, which will counter with the defend function
-    
-    attack(Cloud, Sephiroth);
-    defend(Sephiroth, Cloud);
 
+    $("#attack").click(function() {
+        attack(Cloud, Sephiroth);
+        defend(Sephiroth, Cloud);
+    });
 });
