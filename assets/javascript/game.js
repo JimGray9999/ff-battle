@@ -37,6 +37,9 @@ $(document).ready(function() {
         counterPts = 45,
         image = 'assets/images/Lightning.png');
 
+
+    var selectedPlayer = new Toon();
+
     // setup available players
     $("#player1").attr("src", Cloud.image);
     $("#player2").attr("src", Sephiroth.image);
@@ -69,35 +72,40 @@ $(document).ready(function() {
     // player images, click events choose
     $("#player1").on("click", function() {
         playerPick(Cloud, "#player1");
+        selectedPlayer = Cloud;
+        debugger;
     });
 
     $("#player2").on("click", function() {
         playerPick(Sephiroth, "#player2");
+        selectedPlayer = Sephiroth;
     });
 
     $("#player3").on("click", function() {
         playerPick(Chocobo, "#player3");
+        selectedPlayer = Chocobo;
     });
 
     $("#player4").on("click", function() {
         playerPick(Lightning, "#player4");
+        selectedPlayer = Lightning;
     });
 
 
     // attack and defend functions
     function attack(player, opponent) {
-        $("#log").append("<p>" + player.name + " attacked " + opponent.name +
+        $("#log").prepend("<p>" + player.name + " attacked " + opponent.name +
             " for " + player.counterPts + " points!</p>");
 
         // minus from opponent hit points
         opponent.hitPoints -= player.attackPts;
 
-        $("#log").append("<p>" + opponent.name + " now has " + opponent.hitPoints + " hit points!</p>");
+        $("#log").prepend("<p>" + opponent.name + " now has " + opponent.hitPoints + " hit points!</p>");
 
         // to do: check if opponent HP = 0
         // to do: add slashing sound
         // to do: increase attack power with each attack
-        player.attackPts ^= 2;
+        player.attackPts = player.attackPts ^ 2;
 
         $("#player-ap").text(player.attackPts);
 
@@ -106,7 +114,7 @@ $(document).ready(function() {
     }
 
     function defend(player, opponent) {
-        $("#log").append("<p>" + player.name + " countered " + opponent.name + " for " + player.counterPts + " points!</p>");
+        $("#log").prepend("<p>" + player.name + " countered " + opponent.name + " for " + player.counterPts + " points!</p>");
 
         // minus from player hit points
         opponent.hitPoints -= player.counterPts;
