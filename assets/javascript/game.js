@@ -47,11 +47,13 @@ $(document).ready(function() {
     var Fighters = [Cloud, Sephiroth, Chocobo, Lightning];
 
     // choose your character
-    function playerPick (player) {
+    function playerPick (player, selected) {
         console.log("You selected " + Cloud);
         $(".stats").html("<p>Name: " + player.name + "</p> <p>HP: " + player.hitPoints +
             "</p> <p>AP: " + player.attackPts + "</p> <p>CP: " + player.counterPts + "</p>");
         $(".player").attr("src", player.image);
+        $(".fighters").removeClass("selected");
+        $(selected).addClass("selected");
     }
 
     // choose your opponent
@@ -61,19 +63,19 @@ $(document).ready(function() {
 
     // player images, click events choose
     $("#player1").on("click", function() {
-        playerPick(Cloud);
+        playerPick(Cloud, "#player1");
     });
 
     $("#player2").on("click", function() {
-        playerPick(Sephiroth);
+        playerPick(Sephiroth, "#player2");
     });
 
     $("#player3").on("click", function() {
-        playerPick(Chocobo);
+        playerPick(Chocobo, "#player3");
     });
 
     $("#player4").on("click", function() {
-        playerPick(Lightning);
+        playerPick(Lightning, "#player4");
     });
 
     
@@ -89,6 +91,7 @@ $(document).ready(function() {
 
         // to do: check if opponent HP = 0
         // to do: add slashing sound
+        // to do: increase attack power with each attack
         // to do: change picture red for one second (if time permits)
     }
 
@@ -106,6 +109,7 @@ $(document).ready(function() {
     }
 
     // click events for attack, which will counter with the defend function
+    
     attack(Cloud, Sephiroth);
     defend(Sephiroth, Cloud);
 

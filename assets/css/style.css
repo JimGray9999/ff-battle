@@ -1,3 +1,7 @@
 .battle-log, .fighters, .arena, .stats, .enemy-stats, img {
 	border: 1px solid black;
 }
+
+.selected {
+	border: 10px solid green;
+}
