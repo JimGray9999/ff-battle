@@ -1,7 +1,18 @@
-.battle-log, .fighters, .arena, .stats, .enemy-stats, img {
-	border: 1px solid black;
+.battle-log,
+.fighters,
+.arena,
+.stats,
+.enemy-stats,
+img {
+    border: 1px solid black;
 }
 
 .selected {
-	border: 10px solid green;
+    border: 10px solid green;
+}
+
+.battle-log {
+    width: 600px;
+    height: 225px;
+    overflow: scroll;
 }

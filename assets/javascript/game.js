@@ -48,9 +48,14 @@ $(document).ready(function() {
 
     // choose your character
     function playerPick(player, selected) {
-        console.log("You selected " + Cloud);
-        $(".stats").html("<p>Name: " + player.name + "</p> <p>HP: " + player.hitPoints +
-            "</p> <p>AP: " + player.attackPts + "</p> <p>CP: " + player.counterPts + "</p>");
+        console.log("You selected " + player.name);
+
+        // display player stats
+        $(".stats").html("<p>Name: " + player.name +
+            "</p> <p>HP: " + player.hitPoints +
+            "</p> <p>AP: " + player.attackPts +
+            "</p> <p>CP: " + player.counterPts + "</p>");
+
         $(".player").attr("src", player.image);
         $(".fighters").removeClass("selected");
         $(selected).addClass("selected");
@@ -92,7 +97,12 @@ $(document).ready(function() {
         // to do: check if opponent HP = 0
         // to do: add slashing sound
         // to do: increase attack power with each attack
-        // to do: change picture red for one second (if time permits)
+        player.attackPts ^= 2;
+
+        $("#player-ap").text(player.attackPts);
+
+        // extras:
+        // to do: change picture red for one second
     }
 
     function defend(player, opponent) {
@@ -101,16 +111,19 @@ $(document).ready(function() {
         // minus from player hit points
         opponent.hitPoints -= player.counterPts;
 
-        $("#log").append("<p>" + opponent.name + " now has " + opponent.hitPoints + " hit points!</p>");
+        $("#log").prepend("<p>" + opponent.name + " now has " + opponent.hitPoints + " hit points!</p>");
+        $("#player-hp").text(opponent.hitPoints);
 
         // to do: check if opponent HP = 0
+
+        // extras:
         // to do: add slashing sound
-        // to do: change picture red for one second (if time permits)
+        // to do: change picture red for one second
     }
 
     // click events for attack, which will counter with the defend function
 
-    $("#attack").click(function() {
+    $("#attack").click(function() { //TODO: pass the two objects of the player and opponent
         attack(Cloud, Sephiroth);
         defend(Sephiroth, Cloud);
     });
