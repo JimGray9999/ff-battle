@@ -106,6 +106,7 @@ $(document).ready(function() {
         // to do: add slashing sound
         // to do: increase attack power with each attack
         player.attackPts = player.attackPts ^ 2;
+        debugger;
 
         $("#player-ap").text(player.attackPts);
 
