@@ -81,6 +81,7 @@ $(document).ready(function() {
         Fighters = $.grep(Fighters, function(n, i) {
             return n != Cloud;
         });
+        $(".enemy").attr("src", Fighters[0].image);
         console.log(Fighters);
     });
 
@@ -91,6 +92,7 @@ $(document).ready(function() {
         Fighters = $.grep(Fighters, function(n, i) {
             return n != Sephiroth;
         });
+        $(".enemy").attr("src", Fighters[0].image);
         console.log(Fighters);
     });
 
@@ -101,6 +103,7 @@ $(document).ready(function() {
         Fighters = $.grep(Fighters, function(n, i) {
             return n != Chocobo;
         });
+        $(".enemy").attr("src", Fighters[0].image);
         console.log(Fighters);
     });
 
@@ -111,6 +114,7 @@ $(document).ready(function() {
         Fighters = $.grep(Fighters, function(n, i) {
             return n != Lightning;
         });
+        $(".enemy").attr("src", Fighters[0].image);
         console.log(Fighters);
     });
 
@@ -123,7 +127,7 @@ $(document).ready(function() {
         opponent.hitPoints -= player.attackPts;
 
         // increase player attack points
-        player.attackPts = player.attackPts * 2;
+        player.attackPts = player.attackPts * 1.25;
 
         $("#player-ap").text(player.attackPts);
 
@@ -135,6 +139,11 @@ $(document).ready(function() {
             // change to next opponent
 
         }
+        
+        $(".stats").html("<p>Name: " + player.name +
+            "</p> <p>HP: " + player.hitPoints +
+            "</p> <p>AP: " + player.attackPts +
+            "</p> <p>CP: " + player.counterPts + "</p>");
 
         // extras:
         // to do: change picture red for one second
@@ -157,6 +166,11 @@ $(document).ready(function() {
             // change to next opponent
 
         }
+
+        $(".enemy-stats").html("<p>Name: " + player.name +
+            "</p> <p>HP: " + player.hitPoints +
+            "</p> <p>AP: " + player.attackPts +
+            "</p> <p>CP: " + player.counterPts + "</p>");
         // extras:
         // to do: add slashing sound
         // to do: change picture red for one second
