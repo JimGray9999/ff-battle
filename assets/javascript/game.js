@@ -50,12 +50,26 @@ $(document).ready(function() {
     $("#player3").attr("src", Chocobo.image);
     $("#player4").attr("src", Lightning.image);
 
-    // $("#my-player").addClass("selected");
 
-    // if ($("#my-player").hasClass("selected")) {
-    //     $("#enemy-player").addClass("selected");
-    //     $("#my-player").removeClass("selected");
-    // }
+    $(".player").click(function() {
+        if ($(".player").hasClass("selected")) {
+            $(".enemy").addClass("selected");
+            $(".player").removeClass("selected");
+        } else {
+            $(".player").addClass("selected");
+            $(".enemy").removeClass("selected");
+        }
+    });
+
+    $(".enemy").click(function() {
+        if ($(".enemy").hasClass("selected")) {
+            $(".player").addClass("selected");
+            $(".enemy").removeClass("selected");
+        } else {
+            $(".enemy").addClass("selected");
+            $(".player").removeClass("selected");
+        }
+    });
 
     // choose your character
     function playerPick(player, selected) {
@@ -174,17 +188,22 @@ $(document).ready(function() {
         // extras:
         // to do: add slashing sound
         // to do: change picture red for one second
+        // to do: change opacity of the defeated Toons
     }
 
 
     $("#confirm").click(function() {
-
+        // disable confirm button
+        // enable attack button
+        $("#log").prepend(selectedPlayer + "VS. " + currentOpponent);
 
     });
 
     // attack button click event
     // attacks opponent, then counters with the defend function
-    $("#attack").click(function() { //TODO: pass the two objects of the player and opponent
+    $("#attack").click(function() {
+        //TODO: pass the two objects of the player and opponent
+
         attack(Cloud, Sephiroth);
         defend(Sephiroth, Cloud);
     });
