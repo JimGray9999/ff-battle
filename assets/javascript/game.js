@@ -44,11 +44,18 @@ $(document).ready(function() {
 
     var playerChosen = false;
 
-    // setup available players
+    // setup available player images
     $("#player1").attr("src", Cloud.image);
     $("#player2").attr("src", Sephiroth.image);
     $("#player3").attr("src", Chocobo.image);
     $("#player4").attr("src", Lightning.image);
+
+    // $("#my-player").addClass("selected");
+
+    // if ($("#my-player").hasClass("selected")) {
+    //     $("#enemy-player").addClass("selected");
+    //     $("#my-player").removeClass("selected");
+    // }
 
     // choose your character
     function playerPick(player, selected) {
@@ -63,10 +70,20 @@ $(document).ready(function() {
         $(".player").attr("src", player.image);
         $(".fighters").removeClass("selected");
         $(selected).addClass("selected");
+
+        Fighters = [Cloud, Sephiroth, Chocobo, Lightning];
+
+        Fighters = $.grep(Fighters, function(n, i) {
+            return n != player;
+        });
     }
 
     // choose your opponent
-    function opponentPick() {
+    function opponentPick(opponent) {
+        $(".enemy-stats").html("<p>Name: " + opponent.name +
+            "</p> <p>HP: " + Math.floor(opponent.hitPoints) +
+            "</p> <p>AP: " + Math.floor(opponent.attackPts) +
+            "</p> <p>CP: " + opponent.counterPts + "</p>");
 
     }
 
@@ -75,9 +92,6 @@ $(document).ready(function() {
         playerPick(Cloud, "#player1");
         selectedPlayer = Cloud;
 
-        Fighters = $.grep(Fighters, function(n, i) {
-            return n != Cloud;
-        });
         $(".enemy").attr("src", Fighters[0].image);
         console.log(Fighters);
     });
@@ -86,9 +100,6 @@ $(document).ready(function() {
         playerPick(Sephiroth, "#player2");
         selectedPlayer = Sephiroth;
 
-        Fighters = $.grep(Fighters, function(n, i) {
-            return n != Sephiroth;
-        });
         $(".enemy").attr("src", Fighters[0].image);
         console.log(Fighters);
     });
@@ -97,9 +108,6 @@ $(document).ready(function() {
         playerPick(Chocobo, "#player3");
         selectedPlayer = Chocobo;
 
-        Fighters = $.grep(Fighters, function(n, i) {
-            return n != Chocobo;
-        });
         $(".enemy").attr("src", Fighters[0].image);
         console.log(Fighters);
     });
@@ -108,9 +116,6 @@ $(document).ready(function() {
         playerPick(Lightning, "#player4");
         selectedPlayer = Lightning;
 
-        Fighters = $.grep(Fighters, function(n, i) {
-            return n != Lightning;
-        });
         $(".enemy").attr("src", Fighters[0].image);
         console.log(Fighters);
     });
@@ -156,7 +161,6 @@ $(document).ready(function() {
         $("#log").prepend("<p>" + opponent.name + " now has " + opponent.hitPoints + " hit points!</p>");
         $("#player-hp").text(opponent.hitPoints);
 
-        // to do: check if opponent HP = 0
         if (opponent.hitPoints <= 0) {
             console.log("You have been defeated!");
             // option to restart game
@@ -166,10 +170,17 @@ $(document).ready(function() {
             "</p> <p>HP: " + Math.floor(player.hitPoints) +
             "</p> <p>AP: " + Math.floor(player.attackPts) +
             "</p> <p>CP: " + player.counterPts + "</p>");
+
         // extras:
         // to do: add slashing sound
         // to do: change picture red for one second
     }
+
+
+    $("#confirm").click(function() {
+
+
+    });
 
     // attack button click event
     // attacks opponent, then counters with the defend function

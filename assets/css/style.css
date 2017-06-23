@@ -16,3 +16,7 @@ img {
     height: 225px;
     overflow: scroll;
 }
+
+.hide {
+    visibility: hidden;
+}
