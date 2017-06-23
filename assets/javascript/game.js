@@ -1,7 +1,5 @@
 $(document).ready(function() {
 
-
-
     // construct the Toon object
     function Toon(name, hitPoints, attackPts, counterPts, image) {
         this.name = name;
@@ -39,19 +37,18 @@ $(document).ready(function() {
 
 
     var selectedPlayer = new Toon();
-
     var currentOpponent = new Toon();
 
     // create array of all the created characters
     var Fighters = [Cloud, Sephiroth, Chocobo, Lightning];
+
+    var playerChosen = false;
 
     // setup available players
     $("#player1").attr("src", Cloud.image);
     $("#player2").attr("src", Sephiroth.image);
     $("#player3").attr("src", Chocobo.image);
     $("#player4").attr("src", Lightning.image);
-
-
 
     // choose your character
     function playerPick(player, selected) {
@@ -73,7 +70,7 @@ $(document).ready(function() {
 
     }
 
-    // player images, click events choose
+    // click events for four players
     $("#player1").on("click", function() {
         playerPick(Cloud, "#player1");
         selectedPlayer = Cloud;
@@ -127,7 +124,7 @@ $(document).ready(function() {
         opponent.hitPoints -= player.attackPts;
 
         // increase player attack points
-        player.attackPts = player.attackPts * 1.25;
+        player.attackPts = Math.floor(player.attackPts * 1.25);
 
         $("#player-ap").text(player.attackPts);
 
@@ -137,12 +134,11 @@ $(document).ready(function() {
         if (opponent.hitPoints <= 0) {
             console.log(opponent.name + " has been defeated!");
             // change to next opponent
-
         }
-        
+
         $(".stats").html("<p>Name: " + player.name +
-            "</p> <p>HP: " + player.hitPoints +
-            "</p> <p>AP: " + player.attackPts +
+            "</p> <p>HP: " + Math.floor(player.hitPoints) +
+            "</p> <p>AP: " + Math.floor(player.attackPts) +
             "</p> <p>CP: " + player.counterPts + "</p>");
 
         // extras:
@@ -163,30 +159,28 @@ $(document).ready(function() {
         // to do: check if opponent HP = 0
         if (opponent.hitPoints <= 0) {
             console.log("You have been defeated!");
-            // change to next opponent
-
+            // option to restart game
         }
 
         $(".enemy-stats").html("<p>Name: " + player.name +
-            "</p> <p>HP: " + player.hitPoints +
-            "</p> <p>AP: " + player.attackPts +
+            "</p> <p>HP: " + Math.floor(player.hitPoints) +
+            "</p> <p>AP: " + Math.floor(player.attackPts) +
             "</p> <p>CP: " + player.counterPts + "</p>");
         // extras:
         // to do: add slashing sound
         // to do: change picture red for one second
     }
 
-    // click events for attack, which will counter with the defend function
-
+    // attack button click event
+    // attacks opponent, then counters with the defend function
     $("#attack").click(function() { //TODO: pass the two objects of the player and opponent
         attack(Cloud, Sephiroth);
         defend(Sephiroth, Cloud);
     });
 
+    // clear text from log
     $("#clear-log").click(function() {
-
         $("#log").text("")
-
     });
 
 });
