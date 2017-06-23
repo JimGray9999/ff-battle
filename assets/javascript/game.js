@@ -40,14 +40,18 @@ $(document).ready(function() {
 
     var selectedPlayer = new Toon();
 
+    var currentOpponent = new Toon();
+
+    // create array of all the created characters
+    var Fighters = [Cloud, Sephiroth, Chocobo, Lightning];
+
     // setup available players
     $("#player1").attr("src", Cloud.image);
     $("#player2").attr("src", Sephiroth.image);
     $("#player3").attr("src", Chocobo.image);
     $("#player4").attr("src", Lightning.image);
 
-    // create array of all the created characters
-    var Fighters = [Cloud, Sephiroth, Chocobo, Lightning];
+
 
     // choose your character
     function playerPick(player, selected) {
@@ -73,45 +77,69 @@ $(document).ready(function() {
     $("#player1").on("click", function() {
         playerPick(Cloud, "#player1");
         selectedPlayer = Cloud;
-        debugger;
+
+        Fighters = $.grep(Fighters, function(n, i) {
+            return n != Cloud;
+        });
+        console.log(Fighters);
     });
 
     $("#player2").on("click", function() {
         playerPick(Sephiroth, "#player2");
         selectedPlayer = Sephiroth;
+
+        Fighters = $.grep(Fighters, function(n, i) {
+            return n != Sephiroth;
+        });
+        console.log(Fighters);
     });
 
     $("#player3").on("click", function() {
         playerPick(Chocobo, "#player3");
         selectedPlayer = Chocobo;
+
+        Fighters = $.grep(Fighters, function(n, i) {
+            return n != Chocobo;
+        });
+        console.log(Fighters);
     });
 
     $("#player4").on("click", function() {
         playerPick(Lightning, "#player4");
         selectedPlayer = Lightning;
-    });
 
+        Fighters = $.grep(Fighters, function(n, i) {
+            return n != Lightning;
+        });
+        console.log(Fighters);
+    });
 
     // attack and defend functions
     function attack(player, opponent) {
         $("#log").prepend("<p>" + player.name + " attacked " + opponent.name +
-            " for " + player.counterPts + " points!</p>");
+            " for " + player.attackPts + " points!</p>");
 
         // minus from opponent hit points
         opponent.hitPoints -= player.attackPts;
 
-        $("#log").prepend("<p>" + opponent.name + " now has " + opponent.hitPoints + " hit points!</p>");
-
-        // to do: check if opponent HP = 0
-        // to do: add slashing sound
-        // to do: increase attack power with each attack
-        player.attackPts = player.attackPts ^ 2;
-        debugger;
+        // increase player attack points
+        player.attackPts = player.attackPts * 2;
 
         $("#player-ap").text(player.attackPts);
 
+        $("#log").prepend("<p>" + opponent.name + " now has " + opponent.hitPoints + " hit points!</p>");
+
+        // to do: check if opponent HP = 0
+        if (opponent.hitPoints <= 0) {
+            console.log(opponent.name + " has been defeated!");
+            // change to next opponent
+
+        }
+
         // extras:
         // to do: change picture red for one second
+        // to do: add slashing sound
+        // to do: increase attack power with each attack
     }
 
     function defend(player, opponent) {
@@ -124,7 +152,11 @@ $(document).ready(function() {
         $("#player-hp").text(opponent.hitPoints);
 
         // to do: check if opponent HP = 0
+        if (opponent.hitPoints <= 0) {
+            console.log("You have been defeated!");
+            // change to next opponent
 
+        }
         // extras:
         // to do: add slashing sound
         // to do: change picture red for one second
