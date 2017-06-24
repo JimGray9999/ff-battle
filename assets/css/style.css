@@ -1,18 +1,22 @@
 body {
     background-color: blue;
-    font-family: Oldtown, fantasy;
+    font-family: Blippo, fantasy;
     color: white;
 }
 
 .jumbotron {
     color: blue;
+    padding-bottom: 10px;
 }
 
 .battle-log,
 .fighters,
 .arena,
 .stats,
-.enemy-stats,
+.enemy-stats {
+    border: 1px solid whitesmoke;
+}
+
 img {
     border: 1px solid black;
 }
