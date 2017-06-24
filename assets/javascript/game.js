@@ -36,8 +36,8 @@ $(document).ready(function() {
         image = 'assets/images/Lightning.png');
 
 
-    var selectedPlayer = new Toon();
-    var currentOpponent = new Toon();
+    var selectedPlayer = null;
+    var currentOpponent = null;
 
     // create array of all the created characters
     var Fighters = [Cloud, Sephiroth, Chocobo, Lightning];
@@ -200,8 +200,8 @@ $(document).ready(function() {
         }
 
         $(".enemy-stats").html("<p>Name: " + player.name +
-            "</p> <p>HP: " + Math.floor(player.hitPoints) +
-            "</p> <p>AP: " + Math.floor(player.attackPts) +
+            "</p> <p>HP: " + Math.ceil(player.hitPoints) +
+            "</p> <p>AP: " + Math.ceil(player.attackPts) +
             "</p> <p>CP: " + player.counterPts + "</p>");
 
         // extras:
@@ -212,22 +212,24 @@ $(document).ready(function() {
 
 
     $("#confirm").click(function() {
-        // disable confirm button
-        $("#confirm").prop("disabled", true);
 
-        // enable attack button
-        $("#attack").prop("disabled", false);
-        $("#clear-log").prop("disabled", false);
+        if (selectedPlayer && currentOpponent != null) {
+            // disable confirm button
+            $("#confirm").prop("disabled", true);
 
-        $("#log").prepend(selectedPlayer.name + " VS. " + currentOpponent.name);
+            // enable attack and clear log buttons
+            $("#attack").prop("disabled", false);
+            $("#clear-log").prop("disabled", false);
 
+            $("#log").text("");
+            $("#log").prepend(selectedPlayer.name + " VS. " + currentOpponent.name);
+        } else {
+            $("#log").text("Please make sure to choose your player and first opponent!");
+        }
     });
 
-    // attack button click event
     // attacks opponent, then counters with the defend function
     $("#attack").click(function() {
-        //TODO: pass the two objects of the player and opponent
-
         attack(selectedPlayer, currentOpponent);
         defend(currentOpponent, selectedPlayer);
     });
