@@ -94,44 +94,61 @@ $(document).ready(function() {
 
     // choose your opponent
     function opponentPick(opponent) {
+        currentOpponent = opponent;
+
         $(".enemy-stats").html("<p>Name: " + opponent.name +
             "</p> <p>HP: " + Math.floor(opponent.hitPoints) +
             "</p> <p>AP: " + Math.floor(opponent.attackPts) +
             "</p> <p>CP: " + opponent.counterPts + "</p>");
 
+        $(".enemy").attr("src", opponent.image);
+
     }
 
     // click events for four players
     $("#player1").on("click", function() {
-        playerPick(Cloud, "#player1");
-        selectedPlayer = Cloud;
 
-        $(".enemy").attr("src", Fighters[0].image);
-        console.log(Fighters);
+        if ($(".player").hasClass("selected")) {
+            playerPick(Cloud, "#player1");
+            selectedPlayer = Cloud;
+
+            $(".enemy").attr("src", Fighters[0].image);
+        } else {
+            opponentPick(Cloud);
+        }
     });
 
     $("#player2").on("click", function() {
-        playerPick(Sephiroth, "#player2");
-        selectedPlayer = Sephiroth;
+        if ($(".player").hasClass("selected")) {
+            playerPick(Sephiroth, "#player2");
+            selectedPlayer = Sephiroth;
 
-        $(".enemy").attr("src", Fighters[0].image);
-        console.log(Fighters);
+            $(".enemy").attr("src", Fighters[0].image);
+        } else {
+            opponentPick(Sephiroth);
+        }
     });
 
     $("#player3").on("click", function() {
-        playerPick(Chocobo, "#player3");
-        selectedPlayer = Chocobo;
+        if ($(".player").hasClass("selected")) {
+            playerPick(Chocobo, "#player3");
+            selectedPlayer = Chocobo;
 
-        $(".enemy").attr("src", Fighters[0].image);
-        console.log(Fighters);
+            $(".enemy").attr("src", Fighters[0].image);
+        } else {
+            opponentPick(Chocobo);
+        }
     });
 
     $("#player4").on("click", function() {
-        playerPick(Lightning, "#player4");
-        selectedPlayer = Lightning;
+        if ($(".player").hasClass("selected")) {
+            playerPick(Lightning, "#player4");
+            selectedPlayer = Lightning;
 
-        $(".enemy").attr("src", Fighters[0].image);
-        console.log(Fighters);
+            $(".enemy").attr("src", Fighters[0].image);
+        } else {
+            opponentPick(Lightning);
+        }
     });
 
     // attack and defend functions
@@ -195,7 +212,7 @@ $(document).ready(function() {
     $("#confirm").click(function() {
         // disable confirm button
         // enable attack button
-        $("#log").prepend(selectedPlayer + "VS. " + currentOpponent);
+        $("#log").prepend(selectedPlayer.name + " VS. " + currentOpponent.name);
 
     });
 
