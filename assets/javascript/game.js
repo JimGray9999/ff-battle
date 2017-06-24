@@ -168,7 +168,7 @@ $(document).ready(function() {
 
         // to do: check if opponent HP = 0
         if (opponent.hitPoints <= 0) {
-            console.log(opponent.name + " has been defeated!");
+            $("#log").prepend(opponent.name + " has been defeated!");
             // change to next opponent
         }
 
@@ -211,7 +211,12 @@ $(document).ready(function() {
 
     $("#confirm").click(function() {
         // disable confirm button
+        $("#confirm").addClass("disabled");
+
         // enable attack button
+        $("#attack").removeClass("disabled");
+        $("#clear-log").removeClass("disabled");
+
         $("#log").prepend(selectedPlayer.name + " VS. " + currentOpponent.name);
 
     });
