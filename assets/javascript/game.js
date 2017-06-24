@@ -9,8 +9,9 @@ $(document).ready(function() {
         this.image = image;
     }
 
-    // create instances of the characters as Toon objects
+    //# variables #//
 
+    // create instances of the characters as Toon objects
     var Cloud = new Toon(name = "Cloud",
         hitPoints = 1000,
         attackPts = 50,
@@ -35,7 +36,6 @@ $(document).ready(function() {
         counterPts = 45,
         image = 'assets/images/Lightning.png');
 
-
     var selectedPlayer = null;
     var currentOpponent = null;
 
@@ -50,26 +50,7 @@ $(document).ready(function() {
     $("#player3").attr("src", Chocobo.image);
     $("#player4").attr("src", Lightning.image);
 
-
-    $(".player").click(function() {
-        if ($(".player").hasClass("selected")) {
-            $(".enemy").addClass("selected");
-            $(".player").removeClass("selected");
-        } else {
-            $(".player").addClass("selected");
-            $(".enemy").removeClass("selected");
-        }
-    });
-
-    $(".enemy").click(function() {
-        if ($(".enemy").hasClass("selected")) {
-            $(".player").addClass("selected");
-            $(".enemy").removeClass("selected");
-        } else {
-            $(".enemy").addClass("selected");
-            $(".player").removeClass("selected");
-        }
-    });
+    //# functions #//
 
     // choose your character
     function playerPick(player, selected) {
@@ -87,6 +68,7 @@ $(document).ready(function() {
 
         Fighters = [Cloud, Sephiroth, Chocobo, Lightning];
 
+        // remove selected player from remaining Fighters
         Fighters = $.grep(Fighters, function(n, i) {
             return n != player;
         });
@@ -106,52 +88,6 @@ $(document).ready(function() {
         $(".enemy").attr("src", opponent.image);
 
     }
-
-    // click events for four players
-    $("#player1").on("click", function() {
-
-        if ($(".player").hasClass("selected")) {
-            playerPick(Cloud, "#player1");
-            selectedPlayer = Cloud;
-
-            $(".enemy").attr("src", Fighters[0].image);
-        } else {
-            opponentPick(Cloud);
-        }
-    });
-
-    $("#player2").on("click", function() {
-        if ($(".player").hasClass("selected")) {
-            playerPick(Sephiroth, "#player2");
-            selectedPlayer = Sephiroth;
-
-            $(".enemy").attr("src", Fighters[0].image);
-        } else {
-            opponentPick(Sephiroth);
-        }
-    });
-
-    $("#player3").on("click", function() {
-        if ($(".player").hasClass("selected")) {
-            playerPick(Chocobo, "#player3");
-            selectedPlayer = Chocobo;
-
-            $(".enemy").attr("src", Fighters[0].image);
-        } else {
-            opponentPick(Chocobo);
-        }
-    });
-
-    $("#player4").on("click", function() {
-        if ($(".player").hasClass("selected")) {
-            playerPick(Lightning, "#player4");
-            selectedPlayer = Lightning;
-
-            $(".enemy").attr("src", Fighters[0].image);
-        } else {
-            opponentPick(Lightning);
-        }
-    });
 
     // attack and defend functions
     function attack(player, opponent) {
@@ -174,11 +110,12 @@ $(document).ready(function() {
             
             console.log(Fighters);
             console.log(Fighters.indexOf(opponent));
-            console.log(Fighters.length);
+            console.log("# of fighters left: " + Fighters.length);
 
             if (Fighters.length > 1){
                 Fighters.splice(Fighters.indexOf(opponent));
                 console.log(Fighters);
+                console.log("# of fighters left :" + Fighters.length);
 
                 // load next fighter
                 opponentPick(Fighters[0]);
@@ -226,6 +163,72 @@ $(document).ready(function() {
     }
 
 
+    //# button click events #//
+
+    // click events: choosing players
+    $("#player1").on("click", function() {
+
+        if ($(".player").hasClass("selected")) {
+            playerPick(Cloud, "#player1");
+            selectedPlayer = Cloud;
+
+        } else {
+            opponentPick(Cloud);
+        }
+    });
+
+    $("#player2").on("click", function() {
+        if ($(".player").hasClass("selected")) {
+            playerPick(Sephiroth, "#player2");
+            selectedPlayer = Sephiroth;
+
+        } else {
+            opponentPick(Sephiroth);
+        }
+    });
+
+    $("#player3").on("click", function() {
+        if ($(".player").hasClass("selected")) {
+            playerPick(Chocobo, "#player3");
+            selectedPlayer = Chocobo;
+
+        } else {
+            opponentPick(Chocobo);
+        }
+    });
+
+    $("#player4").on("click", function() {
+        if ($(".player").hasClass("selected")) {
+            playerPick(Lightning, "#player4");
+            selectedPlayer = Lightning;
+
+        } else {
+            opponentPick(Lightning);
+        }
+    });
+
+    // toggle from player to enemy selection
+    $(".player").click(function() {
+        if ($(".player").hasClass("selected")) {
+            $(".enemy").addClass("selected");
+            $(".player").removeClass("selected");
+        } else {
+            $(".player").addClass("selected");
+            $(".enemy").removeClass("selected");
+        }
+    });
+
+    $(".enemy").click(function() {
+        if ($(".enemy").hasClass("selected")) {
+            $(".player").addClass("selected");
+            $(".enemy").removeClass("selected");
+        } else {
+            $(".enemy").addClass("selected");
+            $(".player").removeClass("selected");
+        }
+    });
+
+    // confirm selections, begin battle
     $("#confirm").click(function() {
 
         if (selectedPlayer && currentOpponent != null) {
@@ -245,7 +248,7 @@ $(document).ready(function() {
         }
     });
 
-    // attacks opponent, then counters with the defend function
+    // attack button
     $("#attack").click(function() {
         attack(selectedPlayer, currentOpponent);
         defend(currentOpponent, selectedPlayer);
