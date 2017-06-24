@@ -171,7 +171,22 @@ $(document).ready(function() {
         // to do: check if opponent HP = 0
         if (opponent.hitPoints <= 0) {
             $("#log").prepend(opponent.name + " has been defeated!");
-            // change to next opponent
+            
+            console.log(Fighters);
+            console.log(Fighters.indexOf(opponent));
+            console.log(Fighters.length);
+
+            if (Fighters.length > 1){
+                Fighters.splice(Fighters.indexOf(opponent));
+                console.log(Fighters);
+
+                // load next fighter
+                opponentPick(Fighters[0]);
+
+                $("#log").text("");
+                $("#log").prepend(selectedPlayer.name + " VS. " + currentOpponent.name);
+            }
+            
         }
 
         $(".stats").html("<p>Name: " + player.name +
@@ -220,6 +235,8 @@ $(document).ready(function() {
             // enable attack and clear log buttons
             $("#attack").prop("disabled", false);
             $("#clear-log").prop("disabled", false);
+
+            $(".fighters").addClass("disabled");
 
             $("#log").text("");
             $("#log").prepend(selectedPlayer.name + " VS. " + currentOpponent.name);
