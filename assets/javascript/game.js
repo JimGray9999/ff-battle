@@ -213,11 +213,11 @@ $(document).ready(function() {
 
     $("#confirm").click(function() {
         // disable confirm button
-        $("#confirm").addClass("disabled");
+        $("#confirm").prop("disabled", true);
 
         // enable attack button
-        $("#attack").removeClass("disabled");
-        $("#clear-log").removeClass("disabled");
+        $("#attack").prop("disabled", false);
+        $("#clear-log").prop("disabled", false);
 
         $("#log").prepend(selectedPlayer.name + " VS. " + currentOpponent.name);
 
