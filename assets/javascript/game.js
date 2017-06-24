@@ -90,6 +90,8 @@ $(document).ready(function() {
         Fighters = $.grep(Fighters, function(n, i) {
             return n != player;
         });
+
+        console.log(Fighters);
     }
 
     // choose your opponent
