@@ -193,7 +193,7 @@ $(document).ready(function() {
         $("#player-hp").text(opponent.hitPoints);
 
         if (opponent.hitPoints <= 0) {
-            console.log("You have been defeated!");
+            $("#log").prepend("You have been defeated!");
             // option to restart game
         }
 
