@@ -221,8 +221,8 @@ $(document).ready(function() {
     $("#attack").click(function() {
         //TODO: pass the two objects of the player and opponent
 
-        attack(Cloud, Sephiroth);
-        defend(Sephiroth, Cloud);
+        attack(selectedPlayer, currentOpponent);
+        defend(currentOpponent, selectedPlayer);
     });
 
     // clear text from log
