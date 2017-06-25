@@ -11,6 +11,7 @@ $(document).ready(function() {
 
     //# variables #//
 
+    var fanfare = new Audio("assets/sounds/fanfare.mp3")
     // create instances of the characters as Toon objects
     var Cloud = new Toon(name = "Cloud",
         hitPoints = 1000,
@@ -42,7 +43,7 @@ $(document).ready(function() {
     // create array of all the created characters
     var Fighters = [Cloud, Sephiroth, Chocobo, Lightning];
 
-    var playerChosen = false;
+    var fightCount = 0;
 
     // setup available player images
     $("#player1").attr("src", Cloud.image);
@@ -79,6 +80,8 @@ $(document).ready(function() {
     // choose your opponent
     function opponentPick(opponent) {
         currentOpponent = opponent;
+        
+        console.log(opponent);
 
         $(".enemy-stats").html("<p>Name: " + opponent.name +
             "</p> <p>HP: " + Math.floor(opponent.hitPoints) +
@@ -89,41 +92,44 @@ $(document).ready(function() {
 
     }
 
-    // attack and defend functions
+    // attack function, called by button click event
     function attack(player, opponent) {
+        
+        // attack result
         $("#log").prepend("<p>" + player.name + " attacked " + opponent.name +
             " for " + player.attackPts + " points!</p>");
 
-        // minus from opponent hit points
+        // reduce opponent hit points
         opponent.hitPoints -= player.attackPts;
 
         // increase player attack points
         player.attackPts = Math.floor(player.attackPts * 1.25);
 
+        // update attack points displayed in arena
         $("#player-ap").text(player.attackPts);
 
-        $("#log").prepend("<p>" + opponent.name + " now has " + opponent.hitPoints + " hit points!</p>");
-
-        // to do: check if opponent HP = 0
+        // check if opponent's HP = 0
         if (opponent.hitPoints <= 0) {
-            $("#log").prepend(opponent.name + " has been defeated!");
             
-            console.log(Fighters);
-            console.log(Fighters.indexOf(opponent));
-            console.log("# of fighters left: " + Fighters.length);
+            console.log("Fighters.length: " + Fighters.length);
+            console.log("fightCount: " + fightCount);
 
-            if (Fighters.length > 1){
-                Fighters.splice(Fighters.indexOf(opponent));
-                console.log(Fighters);
-                console.log("# of fighters left :" + Fighters.length);
+            fightCount++;
 
+            console.log("fightCount: " + fightCount);
+
+            $("#log").prepend(opponent.name + " has been defeated!");
+
+            if (fightCount === 3){
+                $("#log").text("You win!");
+                fanfare.play();
+            }else {
                 // load next fighter
-                opponentPick(Fighters[0]);
+                opponentPick(Fighters[fightCount]);
 
                 $("#log").text("");
                 $("#log").prepend(selectedPlayer.name + " VS. " + currentOpponent.name);
-            }
-            
+            }           
         }
 
         $(".stats").html("<p>Name: " + player.name +
@@ -132,18 +138,17 @@ $(document).ready(function() {
             "</p> <p>CP: " + player.counterPts + "</p>");
 
         // extras:
-        // to do: change picture red for one second
         // to do: add slashing sound
-        // to do: increase attack power with each attack
+        // to do: change picture red for one second
     }
 
+    // defend function, called by attack button event
     function defend(player, opponent) {
         $("#log").prepend("<p>" + player.name + " countered " + opponent.name + " for " + player.counterPts + " points!</p>");
 
         // minus from player hit points
         opponent.hitPoints -= player.counterPts;
 
-        $("#log").prepend("<p>" + opponent.name + " now has " + opponent.hitPoints + " hit points!</p>");
         $("#player-hp").text(opponent.hitPoints);
 
         if (opponent.hitPoints <= 0) {
@@ -161,7 +166,6 @@ $(document).ready(function() {
         // to do: change picture red for one second
         // to do: change opacity of the defeated Toons
     }
-
 
     //# button click events #//
 
