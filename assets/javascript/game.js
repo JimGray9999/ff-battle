@@ -17,7 +17,7 @@ $(document).ready(function() {
         hitPoints = 1000,
         attackPts = 50,
         counterPts = 40,
-        image = 'assets/images/cloud.jpg');
+        image = 'assets/images/cloud.JPG');
 
     var Sephiroth = new Toon(name = "Sephiroth",
         hitPoints = 2000,
