@@ -11,7 +11,20 @@ $(document).ready(function() {
 
     //# variables #//
 
-    var fanfare = new Audio("assets/sounds/fanfare.mp3")
+    // sounds //
+    var fanfare = new Audio("assets/sounds/fanfare.mp3");
+    var katanaSound = new Audio("assets/sounds/katana-slash2.mp3");
+    var swordSound = new Audio("assets/sounds/sword-slash4.mp3");
+    var gameMusic = new Audio("assets/sounds/battleLoop.wav");
+
+    // loop battle music while battle is active
+    gameMusic.addEventListener('ended', function() {
+        this.currentTime = 0;
+        this.play();     
+    }, false);
+
+    gameMusic.play();
+    
     // create instances of the characters as Toon objects
     var Cloud = new Toon(name = "Cloud",
         hitPoints = 1000,
@@ -123,6 +136,7 @@ $(document).ready(function() {
             if (fightCount === 3){
                 $("#log").text("You win!");
                 fanfare.play();
+
             }else {
                 // load next fighter
                 opponentPick(Fighters[fightCount]);
@@ -140,6 +154,7 @@ $(document).ready(function() {
         // extras:
         // to do: add slashing sound
         // to do: change picture red for one second
+        // TODO: Create a Start Screen to select player
     }
 
     // defend function, called by attack button event
